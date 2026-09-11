@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="闻天翔的机器人学习与具身智能作品集：HolisticVLA、双臂模仿学习、人形高动态控制与四足机器人 SLAM。">
+  <meta name="theme-color" content="#071a20">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="闻天翔 · Robotics Portfolio">
+  <meta property="og:description" content="Robot Learning, Whole-Body Control, Imitation Learning and SLAM.">
+  <meta property="og:image" content="assets/posters/holistic-first-frame.webp">
+  <title>闻天翔 · Robotics Portfolio</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="site-header" id="top">
+    <div class="nav-shell">
+      <a class="brand" href="#top" aria-label="返回首页">
+        <span class="brand-mark">WTX</span>
+        <span class="brand-text">Robotics Portfolio</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="sr-only">打开导航</span><span></span><span></span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="主导航">
+        <a href="#holistic">HolisticVLA</a>
+        <a href="#so100">双臂平台</a>
+        <a href="#mimic">Mimic</a>
+        <a href="#slam">SLAM</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero section-shell">
+      <div class="hero-copy reveal">
+        <p class="eyebrow">ROBOTICS PORTFOLIO · WEN TIANXIANG</p>
+        <h1>项目与实机演示</h1>
+        <p class="hero-lead">人形机器人全身操作、双臂自主操作、高动态动作控制与四足机器人 SLAM。</p>
+      </div>
+    </section>
+
+    <section class="project-section project-featured" id="holistic">
+      <div class="section-shell">
+        <header class="project-heading reveal">
+          <div>
+            <p class="section-index">01 / FEATURED RESEARCH</p>
+            <h2>HolisticVLA</h2>
+            <p class="project-subtitle">面向接触丰富灵巧交互的人形机器人全身移动操作</p>
+          </div>
+          <div class="project-intro">
+            <p class="role-label">核心负责人 · 第一作者工作</p>
+            <p>围绕“高层策略是否理解接触与任务阶段、低层控制是否能稳定执行”这一核心矛盾，构建从力觉语义建模到全身控制的双层系统。</p>
+            <div class="tag-row"><span>VLA</span><span>Force Awareness</span><span>Task Stage</span><span>Whole-Body Control</span><span>Sim2Real</span></div>
+          </div>
+        </header>
+
+        <div class="featured-video reveal">
+          <video controls playsinline preload="metadata" poster="assets/posters/holistic-first-frame.webp">
+            <source src="media/holistic-vla.mp4" type="video/mp4">
+            你的浏览器不支持 HTML5 视频。
+          </video>
+          <div class="video-label"><span>PROJECT VIDEO</span><strong>03:06</strong></div>
+        </div>
+
+        <div class="metric-strip reveal">
+          <div><strong>78%</strong><span>四类全身操作平均成功率</span></div>
+          <div><strong>+14 pts</strong><span>较最强对比方法的平均提升</span></div>
+          <div><strong>4 Tasks</strong><span>搬运、按钮、蹲取与电柜操作</span></div>
+          <div><strong>&lt;50 ms</strong><span>优化后的实机推理延迟</span></div>
+        </div>
+
+        <div class="architecture reveal">
+          <div class="architecture-heading">
+            <p class="section-index">CORE ARCHITECTURE</p>
+            <h3>感知—控制协同双层架构</h3>
+          </div>
+          <p class="architecture-summary">高层 HolisticVLA 显式融合视觉语义、时序关节力矩和任务阶段；低层 FA-WBC 将离散动作意图转换为连续、抗扰的全身运动。</p>
+
+          <figure class="architecture-figure">
+            <button class="figure-button" type="button" data-lightbox="assets/figures/holistic-high-level.webp" aria-label="放大查看 HolisticVLA 高层策略架构图">
+              <img src="assets/figures/holistic-high-level.webp" alt="HolisticVLA 高层策略架构：MSFSI、TSP 与 Action Expert">
+              <span>点击放大 ↗</span>
+            </button>
+            <figcaption>
+              <span>FIG. 01 · HIGH-LEVEL POLICY</span>
+              <h4>MSFSI + TSP：让策略同时感知接触与任务阶段</h4>
+              <p>时序力矩编码器结合灵巧手状态提取接触特征，经 Force-Semantic Routing MoE 与视觉语言 token 稀疏融合；任务阶段预测器进一步约束动作生成和身体部位分配。</p>
+            </figcaption>
+          </figure>
+
+          <figure class="architecture-figure architecture-figure-reverse">
+            <button class="figure-button" type="button" data-lightbox="assets/figures/holistic-low-level.webp" aria-label="放大查看 FA-WBC 低层控制架构图">
+              <img src="assets/figures/holistic-low-level.webp" alt="FA-WBC 低层执行架构：双阶段课程、扰动课程和离散连续桥接">
+              <span>点击放大 ↗</span>
+            </button>
+            <figcaption>
+              <span>FIG. 02 · LOW-LEVEL EXECUTION</span>
+              <h4>FA-WBC：把高层意图变成可执行的全身动作</h4>
+              <p>通过双阶段 PPO、性能门控扰动课程和离散—连续命令桥接，在接触变化与外部扰动下兼顾上身目标跟踪、下身平衡和航向一致性。</p>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="work-content reveal">
+          <header class="work-content-heading"><p class="section-index">WORK CONTENT</p><h3>工作内容</h3></header>
+          <div class="contribution-grid">
+            <article><span>01</span><h4>数据采集与处理</h4><p>搭建 VR 遥操作链路，采集 G1 全身操作数据，完成多视角图像、机器人状态和手部力矩的同步与任务阶段标注。</p></article>
+            <article><span>02</span><h4>高层 VLA 策略</h4><p>基于 Isaac GR00T 开展微调，实现时序力矩编码、力觉—语义稀疏融合和任务阶段引导的动作生成。</p></article>
+            <article><span>03</span><h4>低层全身控制</h4><p>设计并训练 FA-WBC，采用双阶段 PPO、性能门控扰动课程和离散—连续命令桥接提升跟踪稳定性。</p></article>
+            <article><span>04</span><h4>真机部署与评测</h4><p>完成模型量化、RTC 推理优化和 Unitree G1 部署，并负责四类任务的对比实验、消融测试与问题定位。</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section section-paper" id="so100">
+      <div class="section-shell project-layout">
+        <div class="project-media reveal">
+          <p class="section-index">02 / IMITATION LEARNING</p>
+          <div class="portrait-video">
+            <video controls playsinline preload="metadata" poster="assets/posters/so100-first-frame.webp">
+              <source src="media/so100.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="project-detail reveal">
+          <p class="role-label">核心负责人 · 端到端自主操作</p>
+          <h2>双臂<br>自主操作系统</h2>
+          <p class="project-en">Imitation Learning with Offline & Online RL Post-training</p>
+          <p class="project-summary">以高质量演示数据为起点，完成 ACT、Diffusion Policy 与 π0 的训练对比，并通过离线优势迭代和 Human-in-the-Loop 在线强化学习持续改进策略。</p>
+          <ol class="pipeline-list">
+            <li><span>01</span><div><strong>数据闭环</strong><p>主从遥操作、自适应低通滤波、异常轨迹剔除与多模态时序对齐。</p></div></li>
+            <li><span>02</span><div><strong>模仿学习</strong><p>统一完成数据采集、策略训练、离线评测与双臂真机部署。</p></div></li>
+            <li><span>03</span><div><strong>RL 后训练</strong><p>离线回放池与优势条件策略迭代；actor–learner 异步 SAC 与人工纠偏。</p></div></li>
+            <li><span>04</span><div><strong>安全部署</strong><p>视觉奖励分类器、关节/末端边界、异步推理和动作平滑插值。</p></div></li>
+          </ol>
+          <div class="tag-row"><span>LeRobot</span><span>ACT</span><span>Diffusion Policy</span><span>π0</span><span>HIL-SERL</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section section-night" id="mimic">
+      <div class="section-shell project-layout project-layout-reverse">
+        <div class="project-detail reveal">
+          <p class="section-index">03 / WHOLE-BODY CONTROL</p>
+          <p class="role-label">核心负责人 · 强化学习与 Sim2Real</p>
+          <h2>G1 高动态<br>动作系统</h2>
+          <p class="project-en">Motion Imitation · Basketball · Whole-Body Control</p>
+          <p class="project-summary">把公开人类运动转换为满足机器人约束的参考轨迹，通过大规模 PPO 训练与跨仿真验证，让 Unitree G1 在真机上完成篮球投篮和连续街舞动作。</p>
+          <div class="process-track" aria-label="项目流程">
+            <div><span>01</span><strong>IK 重定向</strong><small>关节极限与接触一致性</small></div>
+            <i>→</i>
+            <div><span>02</span><strong>并行 PPO</strong><small>课程学习与域随机化</small></div>
+            <i>→</i>
+            <div><span>03</span><strong>Sim2Sim</strong><small>MuJoCo 误差分析</small></div>
+            <i>→</i>
+            <div><span>04</span><strong>真机部署</strong><small>ONNX · Unitree G1</small></div>
+          </div>
+          <div class="tag-row"><span>Isaac Gym</span><span>PPO</span><span>MuJoCo</span><span>ONNX</span><span>Unitree G1</span></div>
+        </div>
+        <div class="project-media reveal">
+          <div class="portrait-video portrait-video-dark">
+            <video controls playsinline preload="metadata" poster="assets/posters/mimic-first-frame.webp">
+              <source src="media/mimic-basketball.mp4" type="video/mp4">
+            </video>
+          </div>
+          <p class="media-note">REAL ROBOT DEMO · MIMIC BASKETBALL</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section section-paper" id="slam">
+      <div class="section-shell">
+        <header class="project-heading reveal">
+          <div><p class="section-index">04 / FIELD ROBOTICS</p><h2>车狗协同自主巡检</h2><p class="project-subtitle">让四足机器人在真实场地稳定定位、导航并执行巡检任务</p></div>
+          <div class="project-intro"><p class="role-label">SLAM 主要负责人</p><p>我的工作重点是四足机器人侧的 SLAM 与导航闭环；同时参与任务调度、状态回传、车狗对接及现场系统联调。</p><div class="tag-row"><span>LiDAR SLAM</span><span>Localization</span><span>Navigation</span><span>ROS</span><span>Field Deployment</span></div></div>
+        </header>
+        <div class="slam-layout">
+          <div class="featured-video reveal">
+            <video controls playsinline preload="metadata" poster="assets/posters/dayou-first-frame.webp">
+              <source src="media/dayou-slam.mp4" type="video/mp4">
+            </video>
+            <div class="video-label"><span>FIELD DEMO</span><strong>03:14</strong></div>
+          </div>
+          <div class="slam-flow reveal">
+            <article><span>01</span><div><h3>建图</h3><p>面向室内外衔接、门区和设备通道完成地图构建、坐标系检查与环境适配。</p></div></article>
+            <article><span>02</span><div><h3>定位与重定位</h3><p>处理起点变化、局部遮挡和跨区域运行中的定位稳定性与恢复问题。</p></div></article>
+            <article><span>03</span><div><h3>导航执行</h3><p>将巡检点位和任务序列接入导航，联调路径执行、到点判定与异常恢复。</p></div></article>
+            <article class="secondary-role"><span>+</span><div><h3>系统协同</h3><p>参与车—狗通信、上下车控制、巡检状态回传和真实场地联合测试。</p></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="section-shell"><p>© <span id="year">2026</span> Wen Tianxiang</p><p><a href="https://github.com/eddierexwoker" target="_blank" rel="noreferrer">GitHub ↗</a> · <a href="docs/Wen_Tianxiang_Resume.pdf" target="_blank">Resume ↗</a></p><a href="#top">返回顶部 ↑</a></div>
+  </footer>
+
+  <dialog class="lightbox" id="figure-lightbox">
+    <button type="button" class="lightbox-close" aria-label="关闭架构图">×</button>
+    <img src="" alt="放大的论文架构图">
+  </dialog>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
